@@ -1,13 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import * as React from 'react';
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className='Title'>PolyGas</h1>
+
+        <h1>PolyFees</h1>
+        <p>There's tons of crypto projects.
+          Which ones are people actually paying to use?</p>
       </header>
 
 
