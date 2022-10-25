@@ -27,7 +27,7 @@ export default function BasicTable() {
     const [priceData, setPriceData] = useState("");
 
     const getData = () => {
-        
+
         axios.get(url).then((response) => {
             console.log("HERE__GET DATA FUNCTION");
             setPriceData(response.data);
