@@ -40,6 +40,7 @@ export default function BasicTable() {
             console.log(priceData.data[0].results.oneDayTotalFees);
 
         })
+            .catch(err => alert(console.log("loading")));
 
     }
 
