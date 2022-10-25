@@ -14,7 +14,7 @@ function createData(protocolName, one_DayFees, seven_DayFees) {
 
 
 const rows = [
-    //createData('Error', -1, -1, -1, -1), //speak with some of the engineer of the protocol if you have trouble 
+    createData('Error', -1, -1), //speak with some of the engineer of the protocol if you have trouble 
 ];
 
 
@@ -27,35 +27,35 @@ export default function BasicTable() {
     const [priceData, setPriceData] = useState("");
 
     const getData = () => {
+        
         axios.get(url).then((response) => {
             console.log("HERE__GET DATA FUNCTION");
             setPriceData(response.data);
-            console.log(response.data);
+            console.log(priceData.data);
             console.log("CREATING DATA");
             //rows.push(createData('Error', -1, -1, -1, -1));
             rows.push(createData(priceData.data[0].id, priceData.data[0].results.oneDayTotalFees, -1))
-            rows.push(createData(priceData.data[1].id, priceData.data[1].results.oneDayTotalFees, -1))
-            rows.push(createData(priceData.data[2].id, priceData.data[2].results.oneDayTotalFees, -1))
-            rows.push(createData(priceData.data[3].id, priceData.data[3].results.oneDayTotalFees, -1))
-            console.log(priceData.data[0].results.oneDayTotalFees);
+            //console.log(priceData.data[0].results.oneDayTotalFees);
 
         })
-            .catch(err => alert(console.log("loading")));
+            .catch(err => console.log("loading"));
 
     }
+
 
     useEffect(() => {
 
         getData();
 
-    }, [url])
+    }, [])
+
 
     //more useEffect priceData as depencency
 
 
-    useEffect(() => {
-        getData();
-    }, [url])
+    // useEffect(() => {
+    //     getData();
+    // }, [priceData])
 
     // useEffect(() => {
     //     return () => {
