@@ -47,7 +47,7 @@ export default function BasicTable() {
 
         getData();
 
-    }, [])
+    }, [priceData])
 
 
     //more useEffect priceData as depencency
