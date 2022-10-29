@@ -1,6 +1,6 @@
 
 import './App.css';
-import BasicTable from './components/BasicTable.js';
+import BasicTable from './BasicTable.js';
 function App() {
   return (
     <div className="App">
