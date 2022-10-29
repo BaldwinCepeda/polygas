@@ -9,22 +9,17 @@ import Paper from '@mui/material/Paper';
 import axios from './axios.js';
 
 
+
 const URL = "https://api.cryptostats.community/api/v1/fees/oneDayTotalFees/2022-10-04?metadata=false";
-function createData(protocolName, one_DayFees, seven_DayFees) {
-    return { protocolName, one_DayFees, seven_DayFees };
+
+
+
+function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
 }
 
 
-const rows = [
-    createData('Error', -1, -1), //speak with some of the engineer of the protocol if you have trouble 
-];
-
-console.log("hello world I am here____________________________")
-
-
-
 export default function BasicTable() {
-
 
     const [priceData, setPriceData] = useState([]);
 
@@ -39,19 +34,39 @@ export default function BasicTable() {
             setPriceData(request.data.data);
 
             console.log(priceData);
-            rows.push(createData(priceData[0].id, priceData[0].results.oneDayTotalFees, 0));
-            rows.push(createData(priceData[1].id, priceData[1].results.oneDayTotalFees, 0));
+            // rows.push(createData(priceData[0].id, priceData[0].results.oneDayTotalFees, 0));
+            //rows.push(createData(priceData[1].id, priceData[1].results.oneDayTotalFees, 0));
             return request;
 
         }
 
 
         fetchData();
-
-
+        console.log(priceData);
 
         //If [] is empty we are saying "run once when the table loads, and don't run again" will only run on page load.
     }, [URL])
+
+    const rows = [
+        createData(priceData[0].id, priceData[0].results.oneDayTotalFee, 6.0, 24, 4.0),
+        createData(priceData[1].id, 237, 9.0, 37, 4.3),
+        createData(priceData[2].id, 262, 16.0, 24, 6.0),
+        createData(priceData[3].id, 305, 3.7, 67, 4.3),
+        createData(priceData[4].id, 356, 16.0, 49, 3.9),
+    ];
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,39 +75,33 @@ export default function BasicTable() {
 
 
     return (
-
-
         <TableContainer component={Paper}>
-            <Table sx={{
-                minWidth: 650, flexDirection: 'column',
-                height: '50vh', bgcolor: 'white',
-            }} aria-label="simple table">
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">Protocol Name</TableCell>
-                        <TableCell align="left">1 Day Fees</TableCell>
-                        <TableCell align="left">7 Day Fees</TableCell>
+                        <TableCell>Protocol Name</TableCell>
+                        <TableCell align="right">One Day Fees</TableCell>
+                        <TableCell align="right">Seven Day Fees</TableCell>
+
                     </TableRow>
                 </TableHead>
-
-
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow
-                            key={row.protocolName}
+                            key={row.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {row.protocolName}
+                                {row.name}
                             </TableCell>
-                            <TableCell align="left">{row.one_DayFees}</TableCell>
-                            <TableCell align="left">{row.seven_DayFees}</TableCell>
+                            <TableCell align="right">{row.calories}</TableCell>
+                            <TableCell align="right">{row.fat}</TableCell>
+                            <TableCell align="right">{row.carbs}</TableCell>
+                            <TableCell align="right">{row.protein}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
-
-
             </Table>
-        </TableContainer >
+        </TableContainer>
     );
 }
